@@ -10,10 +10,9 @@
             background-color: #f0f0f0;
             margin: 0;
             padding: 20px;
-        }
-        #container {
             display: flex;
             flex-direction: column;
+            align-items: flex-start;
         }
         #output {
             white-space: pre-wrap;
@@ -24,7 +23,7 @@
             margin-top: 20px;
         }
         #query {
-            width: calc(100% - 22px);
+            width: 100%;
             padding: 10px;
             font-family: 'Courier New', Courier, monospace;
             font-size: 16px;
@@ -39,16 +38,15 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             cursor: pointer;
+            background-color: #ffffff;
         }
     </style>
 </head>
 <body>
-    <div id="container">
-        <div id="output">> hello</div>
-        <div id="input-container">
-            <textarea id="query" rows="4" placeholder="Type your query here..."></textarea>
-            <button onclick="sendQuery()">Submit</button>
-        </div>
+    <div id="output">> hello</div>
+    <div id="input-container">
+        <textarea id="query" rows="4" placeholder="Type your query here..."></textarea>
+        <button onclick="sendQuery()">Submit</button>
     </div>
     <script>
         async function sendQuery() {
