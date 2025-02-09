@@ -8,26 +8,69 @@
         body {
             font-family: 'Courier New', Courier, monospace;
             background-color: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
+            padding: 20px;
         }
-        .container {
-            text-align: center;
+        #container {
+            display: flex;
+            flex-direction: column;
         }
-        #link {
+        #output {
+            white-space: pre-wrap;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+        }
+        #input-container {
             margin-top: 20px;
-            display: block;
-            font-size: 14px;
+        }
+        #query {
+            width: calc(100% - 22px);
+            padding: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div id="text">hello</div>
-        <a id="link" href="https://beta.openai.com/signup/" target="_blank">Start a conversation with GPT-3</a>
+    <div id="container">
+        <div id="output">> hello</div>
+        <div id="input-container">
+            <textarea id="query" rows="4" placeholder="Type your query here..."></textarea>
+            <button onclick="sendQuery()">Submit</button>
+        </div>
     </div>
+    <script>
+        async function sendQuery() {
+            const query = document.getElementById('query').value;
+            const outputElement = document.getElementById('output');
+            
+            // Replace with your actual API endpoint
+            const apiUrl = 'https://api.example.com/query';
+
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ query })
+            });
+
+            const data = await response.json();
+            outputElement.textContent += `\n> ${query}`;
+            outputElement.textContent += `\n> ${data.response}`;
+            document.getElementById('query').value = '';
+        }
+    </script>
 </body>
 </html>
